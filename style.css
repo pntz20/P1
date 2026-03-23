@@ -1,0 +1,97 @@
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+body {
+  background: #f4f6f9;
+  padding: 30px;
+  color: #333;
+}
+
+/* Title */
+h1 {
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+/* Filters section (targets your div automatically) */
+div {
+  background: #ffffff;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  margin-bottom: 20px;
+}
+
+/* Labels */
+label {
+  font-size: 13px;
+  color: #555;
+  margin-right: 5px;
+}
+
+/* Inputs */
+input[type="text"],
+input[type="date"],
+input[type="file"] {
+  padding: 8px 10px;
+  margin: 5px 10px 10px 0;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  transition: 0.2s;
+}
+
+input:focus {
+  border-color: #007bff;
+  outline: none;
+}
+
+/* Button */
+button {
+  padding: 10px 15px;
+  border: none;
+  border-radius: 8px;
+  background: #007bff;
+  color: #fff;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+button:hover {
+  background: #0056b3;
+}
+
+/* Table */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+/* Header */
+thead {
+  background: #007bff;
+  color: white;
+}
+
+th, td {
+  padding: 12px;
+  text-align: left;
+}
+
+/* Rows */
+tbody tr {
+  border-bottom: 1px solid #eee;
+  transition: 0.2s;
+}
+
+tbody tr:hover {
+  background: #f1f7ff;
+}

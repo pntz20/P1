@@ -60,3 +60,32 @@ function filterData() {
 
   renderTable(filtered);
 }
+
+document.getElementById("csvUpload").addEventListener("change", handleCSVUpload);
+
+function handleCSVUpload(event) {
+  const file = event.target.files[0];
+  if (!file) return;
+
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    const text = e.target.result;
+    parseCSV(text);
+  };
+  reader.readAsText(file);
+}
+
+function parseCSV(csvText) {
+  const lines = csvText.split("\n").filter(Boolean);
+  const headers = lines.shift().split(",");
+  const newData = lines.map(line => {
+    const values = line.split(",");
+    const obj = {};
+    headers.forEach((h, i) => obj[h.trim()] = values[i].trim());
+    return obj;
+  });
+  
+  data = newData; // replace existing data array
+  renderTable(data);
+  saveData(); // optionally save to localStorage
+}
