@@ -1,3 +1,13 @@
+let data = [
+  { date: "2026-03-20", location: "Manila", name: "John Doe", notes: "" },
+  { date: "2026-03-21", location: "Cebu", name: "Jane Smith", notes: "" }
+];
+
+const saved = localStorage.getItem("dashboardData"); // 1. Get saved data
+if (saved) {                                         // 2. Check if it exists
+  data = JSON.parse(saved);                          // 3. Parse JSON and overwrite your array
+}
+
 function renderTable(filteredData) {
   const tbody = document.querySelector("#dataTable tbody");
   tbody.innerHTML = "";
@@ -13,7 +23,18 @@ function renderTable(filteredData) {
     `;
 
     tbody.appendChild(tr);
+
+    // Notes listener
+    const notesCell = tr.cells[3];
+    notesCell.addEventListener("input", (e) => {
+      row.notes = e.target.textContent; // update correct row
+      saveData();
+    });
   });
+}
+
+function saveData() {
+  localStorage.setItem("dashboardData", JSON.stringify(data));
 }
 
 // initial load
@@ -26,19 +47,13 @@ function filterData() {
   const name = document.getElementById("name").value.toLowerCase();
 
   const filtered = data.filter(row => {
-    const rowDate = row.date;
-    const rowLocation = row.location.toLowerCase();
-    const rowName = row.name.toLowerCase();
+    const rowDate = new Date(row.date); // <-- convert to Date
+    const from = dateFrom ? new Date(dateFrom) : null;
+    const to = dateTo ? new Date(dateTo) : null;
 
-    const matchesDate =
-      (!dateFrom || rowDate >= dateFrom) &&
-      (!dateTo || rowDate <= dateTo);
-
-    const matchesLocation =
-      !location || rowLocation.includes(location);
-
-    const matchesName =
-        !name || rowName.includes(name);
+    const matchesDate = (!from || rowDate >= from) && (!to || rowDate <= to);
+    const matchesLocation = !location || row.location.toLowerCase().includes(location);
+    const matchesName = !name || row.name.toLowerCase().includes(name);
 
     return matchesDate && matchesLocation && matchesName;
   });
